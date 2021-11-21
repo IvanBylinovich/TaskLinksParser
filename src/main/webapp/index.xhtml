@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+
+
+    <h:head>
+        <title>LinksParser</title>
+
+
+    </h:head>
+
+    <h:body>
+
+        <div class="card">
+            <h:form>
+                    <h:panelGrid  columns="2" >
+                        <div class="p-col-12 p-md-4">
+                            <p:outputLabel for="name" value="Анализируемоя страница"/>
+                        </div>
+
+                        <div class="p-col-12 p-md-10">
+                            <div class="inputPage">
+                                <h:inputText  id="name"
+                                              placeholder="#{mainBean.page}"
+                                              value="#{mainBean.page}" >
+                                </h:inputText>
+                            </div>
+                        </div>
+
+                    </h:panelGrid>
+                <h:panelGrid  cellpadding="7">
+                    <p:commandButton value="Анализировать" action="#{mainBean.fillLinksList}" update="linkTable" styleClass="p-mt-3"/>
+                </h:panelGrid>
+
+                <p:dataTable id="linkTable" var="link" value="#{mainBean.links}"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                             paginator="true" rows="50" styleClass="p-mt-2">
+                    <p:column style="width:3%">
+                        <f:facet name="header">
+                            <h:outputText value="№"/>
+                        </f:facet>
+                        <h:outputText value="#{link.number}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Имя"/>
+                        </f:facet>
+                        <h:outputText value="#{link.name}"/>
+                    </p:column>
+
+                    <p:column  styleClass="p-text-center">
+                        <f:facet name="header">
+                            <h:outputText value="URL"/>
+                        </f:facet>
+
+
+
+                        <p:commandButton id="ajax" update="name" action="#{mainBean.page}">
+                            <h:inputText  id="url"
+                                          placeholder="#{mainBean.page}"
+                                          value="#{link.name}" >
+                            </h:inputText>
+                        </p:commandButton>
+
+
+
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:commandButton value="Очистить список" action="#{mainBean.cleanLinksList}" update="linkTable, name" styleClass="p-mt-3" />
+
+            </h:form>
+        </div>
+
+    </h:body>
+
+
+</html>
