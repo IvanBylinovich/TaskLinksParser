@@ -23,8 +23,8 @@
                             <p:outputLabel for="name" value="Анализируемоя страница"/>
                         </div>
 
-                        <div class="p-col-12 p-md-10">
-                            <div class="inputPage">
+                        <div  class="p-col-12 p-md-10">
+                            <div class="p-col-12 p-md-10">
                                 <h:inputText  id="name"
                                               placeholder="#{mainBean.page}"
                                               value="#{mainBean.page}" >
@@ -33,7 +33,7 @@
                         </div>
 
                     </h:panelGrid>
-                <h:panelGrid  cellpadding="7">
+                <h:panelGrid  class="p-col-12 p-md-10">
                     <p:commandButton value="Анализировать" action="#{mainBean.fillLinksList}" update="linkTable" styleClass="p-mt-3"/>
                 </h:panelGrid>
 
@@ -55,27 +55,16 @@
                     </p:column>
 
                     <p:column  styleClass="p-text-center">
-                        <f:facet name="header">
+                        <f:facet name="url">
                             <h:outputText value="URL"/>
                         </f:facet>
-
-
-
-                        <p:commandButton id="ajax" update="name" action="#{mainBean.page}">
-                            <h:inputText  id="url"
-                                          placeholder="#{mainBean.page}"
-                                          value="#{link.name}" >
-                            </h:inputText>
-                        </p:commandButton>
-
-
-
+                            <h:outputText value="#{link.url}"/>
                     </p:column>
 
                 </p:dataTable>
-
+                <p:panelGrid class="p-col-12 p-md-10">
                 <p:commandButton value="Очистить список" action="#{mainBean.cleanLinksList}" update="linkTable, name" styleClass="p-mt-3" />
-
+                </p:panelGrid>
             </h:form>
         </div>
 
