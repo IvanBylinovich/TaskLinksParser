@@ -18,23 +18,26 @@
 
         <div class="card">
             <h:form>
-                    <h:panelGrid  columns="2" >
+                    <h:panelGrid   columns="2" >
                         <div class="p-col-12 p-md-4">
-                            <p:outputLabel for="name" value="Анализируемоя страница"/>
+                            <p:outputLabel for="inputPage" value="Анализируемоя страница"/>
+                            https://yandex.by/
                         </div>
 
                         <div  class="p-col-12 p-md-10">
                             <div class="p-col-12 p-md-10">
-                                <h:inputText  id="name"
+                                <h:inputText id = "inputPage"
                                               placeholder="#{mainBean.page}"
                                               value="#{mainBean.page}" >
+                                    <f:validateRegex pattern = "(^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$)" />
                                 </h:inputText>
                             </div>
                         </div>
 
                     </h:panelGrid>
-                <h:panelGrid  class="p-col-12 p-md-10">
-                    <p:commandButton value="Анализировать" action="#{mainBean.fillLinksList}" update="linkTable" styleClass="p-mt-3"/>
+                <h:panelGrid  id = "inputPageButton" class="p-col-12 p-md-10">
+                    <p:commandButton value="Анализировать" action="#{mainBean.fillLinksList}" update="linkTable, inputPageButton" styleClass="p-mt-3"/>
+                    <h:message for = "inputPage"  style = "color:red" />
                 </h:panelGrid>
 
                 <p:dataTable id="linkTable" var="link" value="#{mainBean.links}"
@@ -62,8 +65,9 @@
                     </p:column>
 
                 </p:dataTable>
+
                 <p:panelGrid class="p-col-12 p-md-10">
-                <p:commandButton value="Очистить список" action="#{mainBean.cleanLinksList}" update="linkTable, name" styleClass="p-mt-3" />
+                <p:commandButton value="Очистить список" action="#{mainBean.cleanLinksList}" update="linkTable, inputPage" styleClass="p-mt-3" />
                 </p:panelGrid>
             </h:form>
         </div>

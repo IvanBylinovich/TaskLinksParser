@@ -1,8 +1,10 @@
 package by.bylinovich;
 
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,4 +48,7 @@ public class MainBean {
     public void setPage(String page) {
         this.page = page;
     }
+
 }
+
+
