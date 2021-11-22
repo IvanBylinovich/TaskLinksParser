@@ -8,37 +8,74 @@
       xmlns:p="http://primefaces.org/ui" >
 
 
+
     <h:head>
         <title>LinksParser</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <style type="text/css">
+            .loader {
+                border: 6px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 6px solid #3498db;
+                width: 20px;
+                height: 20px;
+                -webkit-animation: spin 2s linear infinite; /* Safari */
+                animation: spin 2s linear infinite;
+            }
+
+            /* Safari */
+            @-webkit-keyframes spin {
+                0% { -webkit-transform: rotate(0deg); }
+                100% { -webkit-transform: rotate(360deg); }
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
 
 
     </h:head>
 
-    <h:body>
+    <h:body theme="">
 
         <div class="card">
             <h:form>
                     <h:panelGrid   columns="2" >
                         <div class="p-col-12 p-md-4">
                             <p:outputLabel for="inputPage" value="Анализируемоя страница"/>
-                            https://yandex.by/
+
+                        </div>
+                        <div class="card">
+
                         </div>
 
-                        <div  class="p-col-12 p-md-10">
-                            <div class="p-col-12 p-md-10">
-                                <h:inputText id = "inputPage"
-                                              placeholder="#{mainBean.page}"
-                                              value="#{mainBean.page}"
-                                                required="true" requiredMessage="Введите адрес web-страницы">
+                        <div class="p-col-12 p-md-10">
+                                <p:inputText class="p-col-12 p-md-10"
+                                             id = "inputPage"
+                                             immediate="true"
+                                             placeholder="#{mainBean.page}"
+                                             value="#{mainBean.page}"
+                                             required="true" requiredMessage="Введите адрес web-страницы">
                                     <f:validator validatorId = "by.bylinovich.UrlValidator" />
-                                </h:inputText>
-                            </div>
+                                </p:inputText>
                         </div>
 
                     </h:panelGrid>
                 <h:panelGrid  id = "inputPageButton" class="p-col-12 p-md-10">
-                    <p:commandButton value="Анализировать" action="#{mainBean.fillLinksList}" update="linkTable, inputPageButton" styleClass="p-mt-3"/>
-                    <h:message for = "inputPage"  style = "color:red" />
+                    <p:commandButton value="Анализировать"  action="#{mainBean.fillLinksList}"  icon="pi pi-spin pi-spinner" update="linkTable, inputPageButton" styleClass="p-mt-3"/>
+                    <p:message class="p-col-12" for = "inputPage"  style = "color:red" />
+
+                    <p:ajaxStatus styleClass="p-d-block p-mb-4">
+
+                        <f:facet name="start">
+                            <div class="loader"></div>
+                        </f:facet>
+
+
+                    </p:ajaxStatus>
+
                 </h:panelGrid>
 
                 <p:dataTable id="linkTable" var="link" value="#{mainBean.links}"
@@ -59,7 +96,7 @@
                     </p:column>
 
                     <p:column  styleClass="p-text-center">
-                        <f:facet name="url">
+                        <f:facet name="header">
                             <h:outputText value="URL"/>
                         </f:facet>
                             <h:outputText value="#{link.url}"/>
