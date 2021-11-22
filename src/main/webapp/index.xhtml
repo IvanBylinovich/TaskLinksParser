@@ -28,8 +28,9 @@
                             <div class="p-col-12 p-md-10">
                                 <h:inputText id = "inputPage"
                                               placeholder="#{mainBean.page}"
-                                              value="#{mainBean.page}" >
-                                    <f:validateRegex pattern = "(^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$)" />
+                                              value="#{mainBean.page}"
+                                                required="true" requiredMessage="Введите адрес web-страницы">
+                                    <f:validator validatorId = "by.bylinovich.UrlValidator" />
                                 </h:inputText>
                             </div>
                         </div>
